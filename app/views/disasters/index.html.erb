@@ -1,5 +1,6 @@
 <h1>Exam Disaster Support System </h1>
 
+
 <%= form_for @disaster do |f| %>
 
     <%= f.label :title%>
@@ -25,7 +26,5 @@
  	 	<h5>category: <%= disaster.category.category_name %></h5>
 		<h5>content: <%= disaster.content %></h5>
 		<h5>post date: <%= disaster.post_date %></h5>
-
-
-
-<% end %>
+<% end %><br>
+<%= paginate @disasters %>

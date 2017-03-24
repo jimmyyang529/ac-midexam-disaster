@@ -1,10 +1,11 @@
 class DisastersController < ApplicationController
+	before_action :authenticate_user!, :except => [:index]
 
 	def index
 		@disaster = Disaster.new
 		@disasters = Disaster.all
 
-		# @disasters = Disaster.page(params[:page]).per(3)
+		@disasters = Disaster.page(params[:page]).per(3)
 	end
 
 	def new
@@ -15,7 +16,7 @@ class DisastersController < ApplicationController
 	def create
 		@disaster = Disaster.new(disaster_params)
 
-		# @disaster.user = current_user
+		@disaster.user = current_user
 
 		 if @disaster.save
 		 		@disaster = Disaster.create(params[:id])
@@ -28,7 +29,7 @@ class DisastersController < ApplicationController
 
 	def show
  		@disaster = Disaster.find(params[:id])
- 		@comment.disaster_id = @disaster.id
+ 		# @comment.disaster_id = @disaster.id
  		@comment = Comment.new
 
 	end
