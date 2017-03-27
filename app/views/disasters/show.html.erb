@@ -1,9 +1,19 @@
-<h1>Details..</h1>
-<br>
+	<h1>Details..</h1><br>
 		<p>Title: <%= @disaster.title %></p>
 		<p>Category: <%= @disaster.category.category_name%>
 		<p>Content: <%= @disaster.content %><br>
 		<p>post Date: <%= @disaster.post_date %><br>
-<br>
 
+	<h2> number of replies: <%= @disaster.comments.count %></h2>
+		<% @disaster.comments.each do|comment| %>	
+			<%= comment.comment_content %><br>
+			<%= time_ago_in_words(comment.created_at) %> <br>
+		<% end %>
+	<h3>Add Comment</h3>
+			<%= form_for([@disaster, @disaster.comments.build]) do |f| %>
+				<%= f.text_area :comment_content %><br>
+				<%= f.submit %>
+				<% end %><br>
+			<p>
+			<%= link_to 'Back to index', disasters_url %></p>
 

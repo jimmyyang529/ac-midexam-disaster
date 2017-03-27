@@ -4,6 +4,7 @@ class DisastersController < ApplicationController
 	def index
 		@disaster = Disaster.new
 		@disasters = Disaster.all
+	
 
 		@disasters = Disaster.page(params[:page]).per(3)
 	end
@@ -15,7 +16,7 @@ class DisastersController < ApplicationController
 
 	def create
 		@disaster = Disaster.new(disaster_params)
-
+		
 		@disaster.user = current_user
 
 		 if @disaster.save
@@ -25,14 +26,27 @@ class DisastersController < ApplicationController
  		else
 		   render :action => :new
   		end
+
+
+
 	end
 
 	def show
  		@disaster = Disaster.find(params[:id])
- 		# @comment.disaster_id = @disaster.id
- 		@comment = Comment.new
 
 	end
+
+
+	def edit
+		@disaster = Disaster.find(params[:id])
+	end
+
+	def update
+		@disaster = Disaster.find(params[:id])
+		@disaster.update(disaster_params)
+		redirect_to disasters_url
+	end
+
 
 
 
@@ -43,7 +57,8 @@ class DisastersController < ApplicationController
  		params.require(:disaster).permit(
  								:title, 
  								:content, 
- 								:category_id
+ 								:category_id,
+ 								:user_id
 
  								)
 	end
