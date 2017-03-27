@@ -4,7 +4,7 @@ class DisastersController < ApplicationController
 	def index
 		@disaster = Disaster.new
 		@disasters = Disaster.all
-	
+
 
 		@disasters = Disaster.page(params[:page]).per(3)
 	end
@@ -39,6 +39,7 @@ class DisastersController < ApplicationController
 
 	def edit
 		@disaster = Disaster.find(params[:id])
+
 	end
 
 	def update
